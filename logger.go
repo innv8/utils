@@ -27,7 +27,7 @@ func InitLogger(logFolder, env string) {
 
 	writer, err := rotatelogs.New(
 		fmt.Sprintf("%sapp-%s.log", logFolder, "%Y-%m-%d"),
-		rotatelogs.WithLinkName(logFolder+"link.log"),
+		rotatelogs.WithLinkName(logFolder+"link"),
 		rotatelogs.WithRotationTime(time.Hour*24),
 	)
 
