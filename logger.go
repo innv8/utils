@@ -19,6 +19,7 @@ import (
 // the output will be a files, rotated every 24 hours
 func InitLogger(logFolder, env string) {
 	// if ENV== debug, set output to stderr
+	log.Printf("mode : %v, log dir : %v", env, logFolder)
 	if env == "debug" {
 		log.SetOutput(os.Stderr)
 		return
