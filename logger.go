@@ -14,12 +14,12 @@ import (
 // InitLogger initializes the logger.
 // It requires logFolder and env.
 // logFolder is the path of the log directory ending with a slash
-// If env is set to dev, the log output will be the stderr.
+// If env is set to debug, the log output will be the stderr.
 // If env is set to anything else (e.g staging or prod or nothing),
 // the output will be a files, rotated every 24 hours
 func InitLogger(logFolder, env string) {
-	// if ENV== dev, set output to stderr
-	if env == "dev" {
+	// if ENV== debug, set output to stderr
+	if env == "debug" {
 		log.SetOutput(os.Stderr)
 		return
 	}
@@ -45,7 +45,7 @@ func InitLogger(logFolder, env string) {
 // APP_NAME
 func logger(msg, level string, params ...interface{}) {
 	message := fmt.Sprintf(msg, params...)
-	if os.Getenv("ENV") == "dev" {
+	if os.Getenv("ENV") == "dedebugv" {
 		log.Print(message)
 		return
 	}
