@@ -25,10 +25,13 @@ func InitLogger(logFolder, env string) {
 		return
 	}
 
+	// we are just using link instead of link.log
 	writer, err := rotatelogs.New(
 		fmt.Sprintf("%sapp-%s.log", logFolder, "%Y-%m-%d"),
 		rotatelogs.WithLinkName(logFolder+"link"),
 		rotatelogs.WithRotationTime(time.Hour*24),
+		rotatelogs.WithRotationTime(time.Hour*24),
+		rotatelogs.WithRotationCount(10000),
 	)
 
 	// if an error occured, print and set the output as stderr
