@@ -19,7 +19,7 @@ import (
 // the output will be a files, rotated every 24 hours
 func InitLogger(logFolder, env string) {
 	// if ENV== debug, set output to stderr
-	log.Printf("mode : %v, log dir : %v", env, logFolder)
+	LogINFO("mode : %v, log dir : %v", env, logFolder)
 	if env == "debug" {
 		log.SetOutput(os.Stderr)
 		return
@@ -42,15 +42,14 @@ func InitLogger(logFolder, env string) {
 	}
 
 	log.SetOutput(writer)
-	return
 }
 
 // Requires the following in .env
 // APP_NAME
 func logger(msg, level string, params ...interface{}) {
 	message := fmt.Sprintf(msg, params...)
-	if os.Getenv("ENV") == "dedebugv" {
-		log.Print(message)
+	if os.Getenv("ENV") == "debug" {
+		log.Println(message)
 		return
 	}
 
