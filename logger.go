@@ -48,7 +48,7 @@ func InitLogger(logFolder, env string) {
 // APP_NAME
 func logger(msg, level string, params ...interface{}) {
 	message := fmt.Sprintf(msg, params...)
-	if os.Getenv("ENV") == "debug" {
+	if os.Getenv("GIN_MODE") == "debug" || os.Getenv("ENV") == "dev" {
 		log.Println(message)
 		return
 	}
