@@ -48,11 +48,6 @@ func InitLogger(logFolder, env string) {
 // APP_NAME
 func logger(msg, level string, params ...interface{}) {
 	message := fmt.Sprintf(msg, params...)
-	if os.Getenv("GIN_MODE") == "debug" || os.Getenv("ENV") == "dev" {
-		log.Println(message)
-		return
-	}
-
 	msgMap := orderedmap.New()
 	msgMap.Set("level", level)
 	msgMap.Set("time", time.Now().Format("2006-06-02 15:04:05.000000"))
