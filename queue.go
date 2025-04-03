@@ -6,7 +6,7 @@ import (
 	"github.com/streadway/amqp"
 )
 
-// QConnect
+// QConnect connects to the queue
 // Connects to rabbitmq
 // Takes qURI
 // Returns conn, error
