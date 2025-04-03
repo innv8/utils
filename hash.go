@@ -1,11 +1,12 @@
 package utils
 
-
 import (
-	"golang.org/x/crypto/bcrypt"
-	"math/rand"
+	"crypto/rand"
+	"math/big"
 	"strings"
 	"time"
+
+	"golang.org/x/crypto/bcrypt"
 )
 
 // GenerateSalt
@@ -15,12 +16,14 @@ func GenerateSalt() string {
 	defer func() {
 		LogINFO("generating salt took %v", time.Since(start))
 	}()
-	rand.Seed(time.Now().UnixNano())
 	var charset = []rune("1234567890qwertyuiopasdfghjklzxcvbnmASDFGHJKLZXCVBNMQWERTYUIOP")
 	var builder strings.Builder
-	charsLen := len(charset)
+	charsLen := int64(len(charset))
 	for i := 0; i < 32; i++ {
-		builder.WriteRune(charset[rand.Intn(charsLen)])
+		temp, _ := rand.Int(rand.Reader, big.NewInt(charsLen))
+		index := temp.Int64()
+		builder.WriteRune(charset[index])
+		//	builder.WriteRune(charset[rand.Intn(charsLen)])
 	}
 	return builder.String()
 }
